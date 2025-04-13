@@ -10,16 +10,6 @@
             --accent-color: #38A3A5;
             --text-color: #333;
             --background-color: #f8f9fa;
-            --container-bg: white;
-        }
-
-        /* Dark mode variables */
-        body.dark-mode {
-            --primary-color: #6BB2D6;
-            --accent-color: #4ECDC4;
-            --text-color: #e0e0e0;
-            --background-color: #1a1a1a;
-            --container-bg: #2d2d2d;
         }
 
         * {
@@ -34,68 +24,116 @@
             line-height: 1.6;
             color: var(--text-color);
             padding: 2rem 1rem;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: var(--container-bg);
+            background: white;
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
         }
 
-        /* Dark mode toggle styles */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--container-bg);
-            border: 2px solid var(--accent-color);
-            border-radius: 20px;
-            padding: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
-        .theme-toggle span {
-            display: block;
-            padding: 5px 10px;
-            font-size: 1.2em;
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
         }
 
-        /* Existing styles remain the same, just update color references to use variables */
-        h1 { color: var(--primary-color); }
-        h2 { color: var(--accent-color); border-color: var(--accent-color); }
-        .highlight-list li { background: rgba(255, 255, 255, 0.05); }
-        .social-link { color: var(--primary-color); }
-        .social-link:hover { background: rgba(56, 163, 165, 0.1); }
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
 
-        /* Add dark mode specific adjustments */
-        body.dark-mode .social-link img {
-            filter: invert(1);
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .skill-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .highlight-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .highlight-list li {
+            background: #f4f4f4;
+            margin: 0.8rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            transition: transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            background: rgba(56, 163, 165, 0.1);
+        }
+
+        .social-link img {
+            width: 28px;
+            height: 28px;
         }
 
         @media (max-width: 768px) {
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <span id="theme-icon">🌙</span>
-    </button>
-
     <div class="container">
         <header class="header">
             <h1>👋 Rodrigo Arnold Alban</h1>
@@ -146,26 +184,5 @@
             </div>
         </section>
     </div>
-<script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if(document.body.classList.contains('dark-mode')) {
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if(savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.getElementById('theme-icon').textContent = '☀️';
-        }
-    </script>
 </body>
 </html>
