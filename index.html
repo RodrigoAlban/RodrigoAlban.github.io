@@ -1,73 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rodrigo Alban</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodrigo Alban | Computer Science Student</title>
     <style>
-        body {
-            background-color: #e6f7ff;
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #2A5C82;
+            --accent-color: #38A3A5;
+            --text-color: #333;
+            --background-color: #f8f9fa;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            padding: 2rem 1rem;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .skills, .social-links {
+
+        .header {
             text-align: center;
-            margin: 20px 0;
+            margin-bottom: 2rem;
         }
-        ul {
-            display: inline-block;
-            text-align: left;
-            padding-left: 20px;
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
-        h1, h2 {
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
             text-align: center;
         }
-        p {
-            text-align: center;
-            margin: 10px 0;
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .skill-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .highlight-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .highlight-list li {
+            background: #f4f4f4;
+            margin: 0.8rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            transition: transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            background: rgba(56, 163, 165, 0.1);
+        }
+
+        .social-link img {
+            width: 28px;
+            height: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>👋 Hello, I'm Rodrigo Alban</h1>
-        
-        <p>
-            <strong>Computer Science</strong> student at <strong>UTFPR</strong> 
-            (Federal University of Technology – Paraná), Brazil 🇧🇷
-        </p>
+        <header class="header">
+            <h1>👋 Rodrigo Alban</h1>
+            <p class="intro">
+                <strong>Computer Science</strong> student at <strong>UTFPR</strong><br>
+                Federal University of Technology – Paraná, Brazil 🇧🇷
+            </p>
+            
+            <div class="skills">
+                <img src="https://img.icons8.com/color/48/sql.png" alt="SQL" class="skill-icon">
+                <img src="https://img.icons8.com/color/48/c-programming.png" alt="C" class="skill-icon">
+                <img src="https://img.icons8.com/color/48/python.png" alt="Python" class="skill-icon">
+                <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-rust-is-a-multi-paradigm-system-programming-language-logo-color-tal-revivo.png" alt="Rust" class="skill-icon">
+                <img src="https://img.icons8.com/color/48/linux.png" alt="Linux" class="skill-icon">
+            </div>
+        </header>
 
-        <div class="skills">
-            <img src="https://img.icons8.com/?size=32&id=J6KcaRLsTgpZ&format=png&color=000000" alt="SQL" width="32" height="32">
-            <img src="https://img.icons8.com/?size=32&id=40670&format=png&color=000000" alt="C" width="32" height="32">
-            <img src="https://img.icons8.com/?size=32&id=13441&format=png&color=000000" alt="Python" width="32" height="32">
-            <img src="https://img.icons8.com/?size=32&id=t7vIvDXazOGO&format=png&color=000000" alt="Rust" width="32" height="32">
-            <img src="https://img.icons8.com/?size=32&id=fG5Tnj4ARIoI&format=png&color=000000" alt="Linux" width="32" height="32">
-        </div>
+        <section>
+            <h2>🚀 Technical Focus</h2>
+            <ul class="highlight-list">
+                <li>Mastering low-level programming with <strong>C</strong> & <strong>Rust</strong></li>
+                <li>Customizing <strong>Linux</strong> environments & <strong>Hyprland</strong> WM</li>
+                <li>Developing automation solutions with <strong>Python</strong></li>
+                <li>Contributing to <strong>open-source</strong> projects</li>
+            </ul>
+        </section>
 
-        <p>💻 Passionate about low-level programming and systems:</p>
-        <ul>
-            <li>Mastering <strong>C</strong> & <strong>Rust</strong></li>
-            <li>Tinkering with <strong>Linux</strong> ecosystems & <strong>Hyprland</strong> Window Manager</li>
-            <li>Currently exploring <strong>Python</strong> & <strong>Automation</strong> libraries</li>
-        </ul>
+        <section>
+            <h2>🌱 Current Exploration</h2>
+            <ul class="highlight-list">
+                <li>Advanced systems programming concepts</li>
+                <li>Performance optimization techniques</li>
+                <li>DevOps tools and practices</li>
+            </ul>
+        </section>
 
-        <p>🌱 Always experimenting with new tools and <strong>open-source</strong> packages</p>
-
-        <h2>📫 Let's connect!</h2>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/rodrigo-alban-54910120a/" target="_blank">
-                <img src="https://img.icons8.com/?size=24&id=xuvGCOXi8Wyg&format=png&color=000000" alt="LinkedIn" width="24" height="24">
-            </a>
-            <a href="https://bsky.app/profile/rodrigoalban.github.io" target="_blank">
-                <img src="https://img.icons8.com/?size=24&id=3ovMFy5JDSWq&format=png&color=000000" alt="BlueSky" width="24" height="24">
-            </a>
-        </div>
+        <section>
+            <h2>📬 Connect With Me</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/rodrigo-alban-54910120a/" class="social-link" target="_blank">
+                    <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
+                    LinkedIn
+                </a>
+                <a href="https://bsky.app/profile/rodrigoalban.github.io" class="social-link" target="_blank">
+                    <img src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/48/external-bluesky-is-a-decentralized-social-network-developed-by-twitter-logo-shadow-tal-revivo.png" alt="BlueSky">
+                    BlueSky
+                </a>
+            </div>
+        </section>
     </div>
 </body>
 </html>
