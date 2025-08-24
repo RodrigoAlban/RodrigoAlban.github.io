@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Performance do C# e .NET: Uma Análise Interativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Stone, Teal) -->
+    <!-- Application Structure Plan: A single-page application with a fixed sidebar for navigation between four thematic sections (Pitch, Demo, Fishbowl, Quiz) corresponding to the source report. This structure provides clear, non-linear access to content. The core interaction is a visual, step-by-step simulation of the .NET compilation/execution process to make the abstract concepts tangible and easy to understand. -->
+    <!-- Visualization & Content Choices: Pitch -> Inform -> Styled Text Card -> No interaction -> Clear thesis statement. Mini-demo -> Organize/Change -> Interactive HTML/CSS/JS Diagram -> Button clicks reveal stages -> Visually demonstrates the CIL/JIT process, which is the core concept. Fishbowl -> Organize -> Accordion UI -> Click to reveal -> Presents questions without cluttering the UI. Batalha de Cards -> Compare/Test -> Interactive Quiz Cards -> Click on options for feedback -> Reinforces learning through active recall. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .active-nav {
+            background-color: #0D9488; /* teal-600 */
+            color: #F0FDFA; /* teal-50 */
+        }
+        .code-block {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .console-output {
+            background-color: #111827;
+            color: #9ca3af;
+            border: 1px solid #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 h-screen bg-stone-800 text-stone-200 p-4 fixed hidden lg:block">
+            <h1 class="text-xl font-bold text-teal-400 mb-8">C# & .NET</h1>
+            <nav>
+                <ul class="space-y-2" id="desktop-nav">
+                    <li><a href="#pitch" class="block py-2 px-4 rounded-lg transition-colors duration-200 hover:bg-stone-700">1. Pitch</a></li>
+                    <li><a href="#demo" class="block py-2 px-4 rounded-lg transition-colors duration-200 hover:bg-stone-700">2. Demonstração</a></li>
+                    <li><a href="#fishbowl" class="block py-2 px-4 rounded-lg transition-colors duration-200 hover:bg-stone-700">3. Debate (Fishbowl)</a></li>
+                    <li><a href="#cards" class="block py-2 px-4 rounded-lg transition-colors duration-200 hover:bg-stone-700">4. Quiz (Cards)</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lg:ml-64 p-4 sm:p-8 md:p-12 w-full">
+            <header class="mb-12">
+                <h1 class="text-4xl font-bold text-teal-700">A Performance do C# e .NET</h1>
+                <p class="text-lg text-stone-600 mt-2">Uma Análise Interativa do Processo de Compilação e Execução.</p>
+            </header>
+
+            <!-- Pitch Section -->
+            <section id="pitch" class="mb-16 scroll-mt-20">
+                <h2 class="text-3xl font-bold text-stone-700 mb-4 border-l-4 border-teal-500 pl-4">1. Pitch: A Tese Central</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-stone-600 mb-4">Vamos desmistificar o que acontece "por baixo dos panos" quando compilamos e executamos uma aplicação C#, focando em como a arquitetura do .NET foi projetada para performance.</p>
+                    <blockquote class="border-l-4 border-teal-200 bg-teal-50 text-teal-800 p-4 rounded-r-lg">
+                        <p class="font-semibold text-lg">Nossa tese é que C# é uma linguagem rápida e performática porque utiliza um processo de duas fases: primeiro, o código é compilado para uma linguagem intermediária (CIL), e depois, o ambiente de execução (CLR) usa um compilador Just-In-Time (JIT) para converter esse código em código de máquina nativo e otimizado no momento da execução.</p>
+                    </blockquote>
+                    <p class="text-stone-600 mt-4">Ao usar `dotnet run`, não estamos apenas executando um script. Estamos acionando todo esse ecossistema de compilação e otimização que garante a máxima eficiência que a máquina pode oferecer.</p>
+                </div>
+            </section>
+
+            <!-- Mini-demo Section -->
+            <section id="demo" class="mb-16 scroll-mt-20">
+                <h2 class="text-3xl font-bold text-stone-700 mb-4 border-l-4 border-teal-500 pl-4">2. Demonstração Interativa</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="text-stone-600 mb-6">Esta simulação visualiza as duas fases do processo de compilação e execução no .NET. Interaja com os botões para ver cada etapa acontecer e entender o papel do CIL, CLR e JIT.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Seu Código C# (`Program.cs`)</h3>
+                            <div class="code-block">
+                                Console.WriteLine("Hello, World!");
+                            </div>
+                            <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                                <button id="build-btn" class="bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors w-full sm:w-auto">1. `dotnet build`</button>
+                                <button id="run-btn" class="bg-stone-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-stone-600 transition-colors w-full sm:w-auto" disabled>2. `dotnet run`</button>
+                            </div>
+                        </div>
+                        <div class="border-2 border-dashed border-stone-300 p-4 rounded-lg min-h-[250px] flex flex-col justify-center items-center transition-all duration-500" id="diagram-container">
+                            <div id="initial-state" class="text-center text-stone-500">
+                                <p>Clique em `dotnet build` para iniciar a compilação.</p>
+                            </div>
+                            <div id="build-state" class="hidden text-center transition-opacity duration-500 opacity-0">
+                                <div class="text-4xl mb-2">📄</div>
+                                <h4 class="font-bold">AppPerformance.dll</h4>
+                                <p class="text-sm text-stone-600">Compilado para CIL (Common Intermediate Language). Este não é o código de máquina final.</p>
+                            </div>
+                            <div id="run-state" class="hidden w-full transition-opacity duration-500 opacity-0">
+                                <div class="text-center mb-2">
+                                    <p class="text-sm font-semibold text-teal-700">CLR & JIT em ação!</p>
+                                </div>
+                                <div class="console-output">
+                                    <p id="console-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fishbowl Section -->
+            <section id="fishbowl" class="mb-16 scroll-mt-20">
+                <h2 class="text-3xl font-bold text-stone-700 mb-4 border-l-4 border-teal-500 pl-4">3. Debate (Fishbowl)</h2>
+                <div class="space-y-4" id="accordion-container">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-header w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-stone-50">
+                            <span>Limitações da Compilação JIT</span>
+                            <span class="accordion-icon transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-4 pt-0 text-stone-600">Quando a compilação JIT (Just-In-Time) pode ser uma *desvantagem* em termos de performance, especialmente no 'cold start' (a primeira inicialização) de uma aplicação? Como o ecossistema .NET tenta resolver isso com técnicas como AOT (Ahead-Of-Time compilation)?</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-header w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-stone-50">
+                            <span>Armadilhas Comuns para Iniciantes</span>
+                            <span class="accordion-icon transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-4 pt-0 text-stone-600">Qual é a confusão mais comum que um dev iniciante faz entre o código C# que escreve, o CIL que é gerado e o código de máquina que é executado? Por que entender essa diferença é crucial para depurar problemas de performance?</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-header w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-stone-50">
+                            <span>Conexão com a Prática (Gerenciamento de Memória)</span>
+                            <span class="accordion-icon transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-4 pt-0 text-stone-600">Na nossa atividade de criar um gestor de tarefas, como o CLR, além de executar o código via JIT, nos ajuda a não nos preocuparmos com gerenciamento de memória, através do seu componente chamado Garbage Collector (GC)?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Batalha de Cards Section -->
+            <section id="cards" class="scroll-mt-20">
+                <h2 class="text-3xl font-bold text-stone-700 mb-4 border-l-4 border-teal-500 pl-4">4. Quiz (Batalha de Cards)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="quiz-container">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Navigation Logic
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('#desktop-nav a');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+            sections.forEach(section => observer.observe(section));
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Demo Logic
+            const buildBtn = document.getElementById('build-btn');
+            const runBtn = document.getElementById('run-btn');
+            const initialState = document.getElementById('initial-state');
+            const buildState = document.getElementById('build-state');
+            const runState = document.getElementById('run-state');
+            const consoleText = document.getElementById('console-text');
+
+            buildBtn.addEventListener('click', () => {
+                initialState.classList.add('hidden');
+                runState.classList.add('hidden');
+                runState.classList.remove('opacity-100');
+                buildState.classList.remove('hidden');
+                setTimeout(() => buildState.classList.add('opacity-100'), 10);
+                
+                runBtn.disabled = false;
+                runBtn.classList.remove('bg-stone-500', 'hover:bg-stone-600');
+                runBtn.classList.add('bg-teal-600', 'hover:bg-teal-700');
+                buildBtn.classList.add('bg-stone-500', 'hover:bg-stone-600');
+                buildBtn.classList.remove('bg-teal-600', 'hover:bg-teal-700');
+            });
+
+            runBtn.addEventListener('click', () => {
+                if (runBtn.disabled) return;
+                buildState.classList.add('hidden');
+                buildState.classList.remove('opacity-100');
+                runState.classList.remove('hidden');
+                setTimeout(() => runState.classList.add('opacity-100'), 10);
+                
+                consoleText.textContent = '';
+                const textToType = '> Hello, World!';
+                let i = 0;
+                function typeWriter() {
+                    if (i < textToType.length) {
+                        consoleText.textContent += textToType.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                typeWriter();
+            });
+
+            // Accordion Logic
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // Quiz Logic
+            const quizData = [
+                {
+                    type: 'multiple-choice',
+                    question: 'Qual é a principal função do compilador JIT (Just-In-Time) no .NET?',
+                    options: [
+                        'Converter o código C# diretamente em um arquivo .exe.',
+                        'Traduzir o código CIL para código de máquina nativo durante a execução.',
+                        'Verificar se há erros de sintaxe no código C#.',
+                        'Gerenciar os pacotes e dependências do projeto.'
+                    ],
+                    correctAnswer: 1,
+                    justification: 'O JIT é parte do CLR e sua função é compilar o código intermediário (CIL) para código de máquina específico da arquitetura onde a aplicação está rodando, garantindo máxima performance.'
+                },
+                {
+                    type: 'true-false',
+                    question: 'O arquivo .dll gerado pelo `dotnet build` contém código de máquina pronto para ser executado diretamente pelo processador.',
+                    options: ['Verdadeiro', 'Falso'],
+                    correctAnswer: 1,
+                    justification: 'O arquivo .dll contém CIL (Common Intermediate Language), um código intermediário. Ele precisa do CLR e do compilador JIT para ser convertido em código de máquina no momento da execução.'
+                },
+                {
+                    type: 'term-definition',
+                    question: 'Termo: CIL (Common Intermediate Language)',
+                    options: [
+                        'Um conjunto de ferramentas de linha de comando para criar projetos .NET.',
+                        'O código-fonte escrito em C# pelo desenvolvedor.',
+                        'Uma linguagem de programação de baixo nível, independente de CPU, para a qual o código C# é compilado.'
+                    ],
+                    correctAnswer: 2,
+                    justification: 'O CIL (também conhecido como MSIL) é o produto da compilação do código C#. Ele permite que o .NET seja multiplataforma e que diferentes linguagens (como F# ou VB.NET) possam interoperar no mesmo ecossistema.'
+                }
+            ];
+
+            const quizContainer = document.getElementById('quiz-container');
+            quizData.forEach((cardData, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md flex flex-col';
+                
+                let optionsHtml = '';
+                cardData.options.forEach((option, optionIndex) => {
+                    optionsHtml += `<button data-index="${optionIndex}" class="quiz-option w-full text-left p-3 my-1 border border-stone-300 rounded-lg hover:bg-stone-100 transition-colors">${option}</button>`;
+                });
+
+                card.innerHTML = `
+                    <h3 class="font-bold text-lg mb-4">Card ${index + 1}: ${cardData.type === 'true-false' ? 'Verdadeiro ou Falso' : (cardData.type === 'term-definition' ? 'Termo-Definição' : 'Múltipla Escolha')}</h3>
+                    <p class="text-stone-700 mb-4 flex-grow">${cardData.question}</p>
+                    <div class="options-container">${optionsHtml}</div>
+                    <p class="justification text-sm text-stone-600 mt-4 bg-stone-50 p-3 rounded-lg hidden"></p>
+                `;
+
+                quizContainer.appendChild(card);
+
+                const options = card.querySelectorAll('.quiz-option');
+                const justification = card.querySelector('.justification');
+                
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        const selectedIndex = parseInt(option.getAttribute('data-index'));
+                        const isCorrect = selectedIndex === cardData.correctAnswer;
+
+                        // Disable all buttons after one is clicked
+                        options.forEach(btn => {
+                            btn.disabled = true;
+                            btn.classList.remove('hover:bg-stone-100');
+                        });
+
+                        if (isCorrect) {
+                            option.classList.add('bg-teal-100', 'border-teal-500', 'ring-2', 'ring-teal-300');
+                        } else {
+                            option.classList.add('bg-red-100', 'border-red-500', 'ring-2', 'ring-red-300');
+                            // Highlight the correct answer
+                            options[cardData.correctAnswer].classList.add('bg-teal-100', 'border-teal-500');
+                        }
+                        
+                        justification.textContent = cardData.justification;
+                        justification.classList.remove('hidden');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
