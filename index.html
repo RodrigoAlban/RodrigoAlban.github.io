@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/console.png">
+    <title>Rodrigo Alban | Computer Science Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #06b6d4;
+            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #1d4ed8;
+            --accent-color: #0891b2;
+            --text-color: #f9fafb;
+            --bg-color: #111827;
+            --card-bg: #1f2937;
+            --border-color: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero-content .typing {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            min-height: 2rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .hero-social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-social-link img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 0;
+            background-color: var(--card-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .skill-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--card-bg);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .highlight-list {
+            list-style: none;
+        }
+
+        .highlight-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--card-bg);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .social-link img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Rodrigo Alban</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#focus">Focus</a></li>
+                <li><a href="#studying">Studying</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>👋 Hi, I'm Rodrigo Arnold Alban</h1>
+                    <div class="typing" id="typing"></div>
+                    <p>
+                        <strong>Computer Science</strong> student at <strong>UTFPR</strong><br>
+                        Federal University of Technology – Paraná, Brazil 🇧🇷<br>
+                        <strong>Development Intern</strong> at <strong>Frimesa</strong> - <strong>Medianeira</strong> branch office
+                    </p>
+                    <div class="hero-social-links">
+                        <a href="https://www.linkedin.com/in/rodrigo-alban-54910120a/" class="hero-social-link" target="_blank">
+                            <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
+                            LinkedIn
+                        </a>
+                        <a href="https://bsky.app/profile/rodrigoalban.github.io" class="hero-social-link" target="_blank">
+                            <img src="https://img.icons8.com/?size=48&id=3ovMFy5JDSWq&format=png&color=000000" alt="BlueSky">
+                            BlueSky
+                        </a>
+                    </div>
+                    <a href="#skills" class="cta-button">View My Skills</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2 class="section-title">My Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/?size=100&id=J6KcaRLsTgpZ&format=png&color=000000" alt="SQL" class="skill-icon">
+                        <h3>SQL</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/color/64/c-programming.png" alt="C" class="skill-icon">
+                        <h3>C</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/color/64/python.png" alt="Python" class="skill-icon">
+                        <h3>Python</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/64/external-rust-is-a-multi-paradigm-system-programming-language-logo-color-tal-revivo.png" alt="Rust" class="skill-icon">
+                        <h3>Rust</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/color/64/linux.png" alt="Linux" class="skill-icon">
+                        <h3>Linux</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/color/64/vue-js.png" alt="Vue.js" class="skill-icon">
+                        <h3>Vue.js</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/?size=100&id=8ljTDYUEydbJ&format=png&color=000000" alt="PL/SQL" class="skill-icon">
+                        <h3>PL/SQL</h3>
+                    </div>
+                    <div class="skill-card">
+                        <img src="https://img.icons8.com/color/64/flask.png" alt="Flask" class="skill-icon">
+                        <h3>Flask</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="focus" class="section">
+            <div class="container">
+                <div class="content-grid">
+                    <div>
+                        <h2 class="section-title">🚀 Technical Focus</h2>
+                        <ul class="highlight-list">
+                            <li class="highlight-item">
+                                <strong>Mastering lower-level programming</strong> with <strong>C</strong> & <strong>Rust</strong>
+                            </li>
+                            <li class="highlight-item">
+                                <strong>Customizing Linux environments</strong> & <strong>Hyprland</strong> WM
+                            </li>
+                            <li class="highlight-item">
+                                <strong>Developing automation solutions</strong> with <strong>Python</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="section-title">🌱 Currently Studying</h2>
+                        <ul class="highlight-list">
+                            <li class="highlight-item">
+                                Advanced systems programming concepts
+                            </li>
+                            <li class="highlight-item">
+                                Quality control and performance optimization techniques
+                            </li>
+                            <li class="highlight-item">
+                                DevOps tools and practices
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">📬 Connect With Me</h2>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rodrigo-alban-54910120a/" class="social-link" target="_blank">
+                        <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
+                        LinkedIn
+                    </a>
+                    <a href="https://bsky.app/profile/rodrigoalban.github.io" class="social-link" target="_blank">
+                        <img src="https://img.icons8.com/?size=48&id=3ovMFy5JDSWq&format=png&color=000000" alt="BlueSky">
+                        BlueSky
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rodrigo Alban. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Typing effect
+        const typingElement = document.getElementById('typing');
+        const texts = [
+            'Computer Science Student',
+            'Systems Programmer',
+            'Linux Enthusiast',
+            'Automation Developer'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                setTimeout(typeWriter, isDeleting ? 100 : 150);
+            }
+        }
+
+        typeWriter();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.dataset.theme = body.dataset.theme === 'dark' ? '' : 'dark';
+            themeToggle.textContent = body.dataset.theme === 'dark' ? '☀️' : '🌙';
+            localStorage.setItem('theme', body.dataset.theme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.dataset.theme = savedTheme;
+            themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card, .highlight-item').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                if (body.dataset.theme === 'dark') {
+                    header.style.backgroundColor = 'rgba(31, 41, 55, 0.95)';
+                }
+            } else {
+                header.style.backgroundColor = 'var(--card-bg)';
+            }
+        });
+    </script>
+</body>
+</html>
