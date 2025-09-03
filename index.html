@@ -48,7 +48,6 @@
             padding: 0 1rem;
         }
 
-        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -99,7 +98,6 @@
             color: var(--text-color);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -176,7 +174,6 @@
             transform: translateY(-2px);
         }
 
-        /* Skills Section */
         .skills {
             padding: 5rem 0;
             background-color: var(--card-bg);
@@ -224,7 +221,6 @@
             transform: scale(1.1);
         }
 
-        /* Content Sections */
         .section {
             padding: 5rem 0;
         }
@@ -258,7 +254,6 @@
             transform: translateY(-2px);
         }
 
-        /* Contact Section */
         .contact {
             padding: 5rem 0;
             background-color: var(--card-bg);
@@ -341,7 +336,6 @@
             height: 24px;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -349,7 +343,6 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2rem;
@@ -368,7 +361,6 @@
             }
         }
 
-        /* Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -482,13 +474,13 @@
                         <h2 class="section-title">🌱 Currently Studying</h2>
                         <ul class="highlight-list">
                             <li class="highlight-item">
-                                Advanced systems programming concepts
+                                Clean <strong>Architecture</strong> and <strong>Programming</strong> principles
                             </li>
                             <li class="highlight-item">
-                                Quality control and performance optimization techniques
+                                <strong>Quality control</strong> and <strong>performance optimization</strong> techniques
                             </li>
                             <li class="highlight-item">
-                                DevOps tools and practices
+                                <strong>DevOps tools</strong> and <strong>practices</strong>
                             </li>
                         </ul>
                     </div>
@@ -520,13 +512,13 @@
     </footer>
 
     <script>
-        // Typing effect
         const typingElement = document.getElementById('typing');
         const texts = [
             'Computer Science Student',
             'Systems Programmer',
             'Linux Enthusiast',
-            'Automation Developer'
+            'Automation Developer',
+            'PL/SQL Developer'
         ];
         let textIndex = 0;
         let charIndex = 0;
@@ -557,7 +549,6 @@
 
         typeWriter();
 
-        // Theme toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
@@ -567,14 +558,12 @@
             localStorage.setItem('theme', body.dataset.theme);
         });
 
-        // Load saved theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.dataset.theme = savedTheme;
             themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         }
 
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -588,7 +577,6 @@
             });
         });
 
-        // Fade in animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -607,7 +595,6 @@
             observer.observe(el);
         });
 
-        // Header background on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {

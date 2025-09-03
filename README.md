@@ -1,9 +1,9 @@
 # RodrigoAlban.github.io
 
-My personal portfolio website showcasing my skills, projects, and experience as a Computer Science student.
+Meu site de portfólio pessoal exibindo minhas habilidades, projetos e experiência como estudante de Ciência da Computação.
 
-## BlueSky Profile
+## Perfil BlueSky
 
-This site also hosts my BlueSky profile verification at `.well-known/atproto-did`.
+Este site também hospeda a verificação do meu perfil BlueSky em `.well-known/atproto-did`.
 
 [![BlueSky](https://img.icons8.com/?size=32&id=3ovMFy5JDSWq&format=png&color=000000)](https://bsky.app/profile/rodrigoalban.github.io)
